@@ -1,0 +1,21 @@
+# ~/.local/share/chezmoi/.chezmoi.yaml.tmpl
+encryption: age
+age:
+  identity: "~/.config/chezmoi/key.txt"
+  recipient: age1smh3c2p8cxqckg77lwv6ys46dwdxfnyqmm9hk7avy56xek7xe3uscqm6xp
+data:
+  # 询问是否使用默认邮箱
+  {{- $useDefault := promptBoolOnce . "use_default_email" "Use default email (sincerely.hello.hello@gmail.com)?" true -}}
+  {{- if $useDefault }}
+  email: sincerely.hello.hello@gmail.com
+  {{- else }}
+  email: {{ promptStringOnce . "email" "What is your email address?" | quote }}
+  {{- end }}
+
+  # 询问是否使用默认用户名
+  {{- $useDefaultUsername := promptBoolOnce . "use_default_username" "Use default username (sincerely-hello-world)?" true -}}
+  {{- if $useDefaultUsername }}
+  username: sincerely-hello-world
+  {{- else }}
+  username: {{ promptStringOnce . "username" "What is your username?" | quote }}
+  {{- end }}
